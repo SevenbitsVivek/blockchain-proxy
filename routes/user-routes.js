@@ -283,7 +283,7 @@ app.post('/addWalletInDatabase', jwtCheck, requireScope, async function (req, re
       const walletExists = await transaction.checkIfWalletExistsOrNot(wallet.walletAddress, wallet.privateKey);
       console.log("walletExists ===>", walletExists)
       console.log("walletExists ===>", walletExists.rows)
-      if (!(walletExists.rows == [])) {
+      if (walletExists.rows.length > 0) {
         let response = {
           status: false,
           code: 400,
