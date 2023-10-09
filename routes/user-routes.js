@@ -278,8 +278,10 @@ app.post('/addWalletInDatabase', jwtCheck, requireScope, async function (req, re
         };
         return res.status(400).send(response);
       }
+      console.log("wallet.walletAddress ===>", wallet.walletAddress)
       // Check if the wallet address already exists in the database
       const walletExists = await transaction.checkIfWalletExistsOrNot(wallet.walletAddress);
+      console.log("walletExists ===>", walletExists)
       if (walletExists) {
         let response = {
           status: false,
