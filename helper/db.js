@@ -321,8 +321,10 @@ db.prototype.getWalletsAddressesFromDatabase = function () {
 
 db.prototype.checkIfWalletExistsOrNot = function (wallet_address, private_key) {
   return new Promise(function (resolve, reject) {
+    const sqlQuery = `SELECT * FROM walletAddresses WHERE wallet_address = '${wallet_address}' AND private_key = '${private_key}'`
+    console.log('SQL Query:', sqlQuery); // Log the SQL query for debugging
     pool.query(
-      `SELECT * FROM walletAddresses WHERE wallet_address = '${wallet_address}' AND private_key = '${private_key}'`,
+      sqlQuery,
       function (error, results) {
         if (error) {
           console.error('[DB] Error while checking if the wallet address exists or not:', error);
