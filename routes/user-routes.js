@@ -13,7 +13,7 @@ var app = module.exports = express.Router();
  * It can be use to add new user in the system
  * To change username and password please update below username and password and 
  * restart the project.
- */
+*/
 var users = [{
   id: 1,
   username: 'Admin',
@@ -23,7 +23,7 @@ var users = [{
 /**
  * Function will create unique id for each JWT accessToken
  * it help the system to uniqly identify the each JWT Token. 
- */
+*/
 function createIdToken(user) {
   return jwt.sign(_.omit(user, 'password'), config.secret, { expiresIn: 60 * 60 * 24 });
 }
@@ -31,7 +31,7 @@ function createIdToken(user) {
 /**
  * Function will generate new JWT access token
  * JWT access token will be used to authenticate user in the system. 
- */
+*/
 function createAccessToken() {
   return jwt.sign({
     iss: config.issuer,
@@ -46,7 +46,7 @@ function createAccessToken() {
 
 /**
  * Generate Unique Identifier for the access token
- */
+*/
 function genJti() {
   let jti = '';
   let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -60,7 +60,7 @@ function genJti() {
  * Function will fetch user information from request data and search it 
  * in existing user base in the system.
  * it will return user object with username and type.
- */
+*/
 function getUserScheme(req) {
   var username;
   var type;
@@ -82,7 +82,7 @@ function getUserScheme(req) {
  * Function will fetch user information from request data and search it 
  * in existing user base in the system.
  * it will return user object with username and type.
- */
+*/
 function getNewUserScheme(user) {
   var username;
   var type;
@@ -103,7 +103,7 @@ function getNewUserScheme(user) {
 
 /**
  * Check method will validate the JWT Token provided by the user in the Request Header.
- */
+*/
 var jwtCheck = expressjwt({
   secret: config.secret,
   audience: config.audience,
@@ -125,7 +125,7 @@ function requireScope(req, res, next) {
 /**
  * API adduser will allow admin user to add new user in the system
  * Admin needs to provide new user information alog with the password.
- */
+*/
 app.post('/adduser', function (req, res) {
   try {
     var userScheme = getUserScheme(req);
