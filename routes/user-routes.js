@@ -112,7 +112,7 @@ var jwtCheck = expressjwt({
 
 /**
  * Function will will check the scope of the JWT Token provided by the user in the Request Header.
- */
+*/
 function requireScope(req, res, next) {
   var scope = 'full_access';
   var has_scopes = req.user.scope === scope;
